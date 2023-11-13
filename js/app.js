@@ -6,11 +6,13 @@ let inferiorDisponivel = document.getElementById('qtd-inferior').textContent;
 function descontarQtd(tipo, quantidade) {
     if (tipo === 'inferior') {
         inferiorDisponivel -= quantidade;
-
+        document.getElementById('qtd-inferior').innerText = inferiorDisponivel;
     } else if (tipo == 'superior') {
         superiorDisponivel -= quantidade;
+        document.getElementById('qtd-superior').innerText = superiorDisponivel;
     } else {
         pistaDisponivel -= quantidade;
+        document.getElementById('qtd-pista').innerText = pistaDisponivel;
     }
 }
 
@@ -20,11 +22,8 @@ function comprar() {
     console.log('Tipo: ' + tipoIngresso);
     //pegando a quantidade a ser comprada
     let quantidadeCompra = Number(document.getElementById('qtd').value);
-    console.log('Qtd: ' + quantidadeCompra);
+    console.log('Qtd a comprar: ' + quantidadeCompra);
     
-    console.log('pistaDisponivel: ' + pistaDisponivel); 
-    console.log('superiorDisponivel: ' + superiorDisponivel); 
-    console.log('inferiorDisponivel: ' + inferiorDisponivel); 
 
     if (quantidadeCompra.length == 0 || quantidadeCompra == 0) {
         window.alert('Informe uma quantidade válida.');
@@ -41,7 +40,9 @@ function comprar() {
         }
 
         //precisa entender pq não está atualizando na página a quantidade disponível depois de chamar a função descontarQtd
-
+        console.log('pistaDisponivel: ' + pistaDisponivel); 
+        console.log('superiorDisponivel: ' + superiorDisponivel); 
+        console.log('inferiorDisponivel: ' + inferiorDisponivel);
         console.log('ok');
     }
 }
