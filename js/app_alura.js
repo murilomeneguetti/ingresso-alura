@@ -1,48 +1,45 @@
-//pegando as quantidades disponíveis de cada tipo
-let pistaDisponivel = document.getElementById('qtd-pista').textContent;
-let superiorDisponivel = document.getElementById('qtd-superior').textContent;
-let inferiorDisponivel = document.getElementById('qtd-inferior').textContent;
+function comprar() {
+    let tipo = document.getElementById('tipo-ingresso');
+    let qtd = parseInt(document.getElementById('qtd').value);
 
-function descontarQtd(tipo, quantidade) {
-    if (tipo === 'inferior') {
-        inferiorDisponivel -= quantidade;
-        document.getElementById('qtd-inferior').innerText = inferiorDisponivel;
-    } else if (tipo == 'superior') {
-        superiorDisponivel -= quantidade;
-        document.getElementById('qtd-superior').innerText = superiorDisponivel;
+    if (tipo.value == 'pista') {
+        comprarPista(qtd);
+    } else if (tipo.value == 'superior') {
+        comprarSuperior(qtd);
     } else {
-        pistaDisponivel -= quantidade;
-        document.getElementById('qtd-pista').innerText = pistaDisponivel;
+        comprarInferior(qtd);
     }
 }
 
-function comprar() {
-    //pegando o tipo do ingresso
-    let tipoIngresso = document.getElementById('tipo-ingresso').value;
-    console.log('Tipo: ' + tipoIngresso);
-    //pegando a quantidade a ser comprada
-    let quantidadeCompra = Number(document.getElementById('qtd').value);
-    console.log('Qtd a comprar: ' + quantidadeCompra);
-    
-
-    if (quantidadeCompra.length == 0 || quantidadeCompra == 0) {
-        window.alert('Informe uma quantidade válida.');
-        console.log('aviso');
+function comprarPista(qtd) {
+    let qtdPista = parseInt(document.getElementById('qtd-pista').textContent);
+    if (qtd > qtdPista) {
+        alert('Quantidade indisponível para tipo pista');
     } else {
-        if (tipoIngresso == 'inferior' && quantidadeCompra > Number(inferiorDisponivel)) {
-            window.alert('Quantidade indisponível para cadeira inferior!');
-        } else if (tipoIngresso == 'superior' && quantidadeCompra > Number(superiorDisponivel)) {
-            window.alert('Quantidade indisponível para cadeira superior!');
-        } else if (tipoIngresso == 'pista' && quantidadeCompra > Number(pistaDisponivel)) {
-            window.alert('Quantidade indisponível para pista!');
-        } else {
-            descontarQtd(tipoIngresso, quantidadeCompra);
-        }
+        qtdPista = qtdPista - qtd;
+        document.getElementById('qtd-pista').textContent = qtdPista;
+        console.log('Compra realizada com sucesso!');
+    }
+}
 
-        //precisa entender pq não está atualizando na página a quantidade disponível depois de chamar a função descontarQtd
-        console.log('pistaDisponivel: ' + pistaDisponivel); 
-        console.log('superiorDisponivel: ' + superiorDisponivel); 
-        console.log('inferiorDisponivel: ' + inferiorDisponivel);
-        console.log('ok');
+function comprarSuperior(qtd) {
+    let qtdSuperior = parseInt(document.getElementById('qtd-superior').textContent);
+    if (qtd > qtdSuperior) {
+        alert('Quantidade indisponível para tipo superior');
+    } else {
+        qtdSuperior = qtdSuperior - qtd;
+        document.getElementById('qtd-superior').textContent = qtdSuperior;
+        console.log('Compra realizada com sucesso!');
+    }
+}
+
+function comprarInferior(qtd) {
+    let qtdInferior = parseInt(document.getElementById('qtd-inferior').textContent);
+    if (qtd > qtdInferior) {
+        alert('Quantidade indisponível para tipo inferior');
+    } else {
+        qtdInferior = qtdInferior - qtd;
+        document.getElementById('qtd-inferior').textContent = qtdInferior;
+        console.log('Compra realizada com sucesso!');
     }
 }
